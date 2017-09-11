@@ -13,6 +13,7 @@
 		DC8366351F6672A900D00461 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC8366331F6672A900D00461 /* Main.storyboard */; };
 		DC8366371F6672A900D00461 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC8366361F6672A900D00461 /* Assets.xcassets */; };
 		DC83663A1F6672A900D00461 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC8366381F6672A900D00461 /* LaunchScreen.storyboard */; };
+		DC8366451F668C3F00D00461 /* YJNAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8366441F668C3F00D00461 /* YJNAudioPlayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		DC8366361F6672A900D00461 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DC8366391F6672A900D00461 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DC83663B1F6672A900D00461 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC8366431F668C3F00D00461 /* YJNAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJNAudioPlayer.h; sourceTree = "<group>"; };
+		DC8366441F668C3F00D00461 /* YJNAudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJNAudioPlayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +87,8 @@
 		DC8366411F6672F500D00461 /* YJNAudioPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				DC8366431F668C3F00D00461 /* YJNAudioPlayer.h */,
+				DC8366441F668C3F00D00461 /* YJNAudioPlayer.m */,
 			);
 			path = YJNAudioPlayer;
 			sourceTree = "<group>";
@@ -170,6 +175,7 @@
 				DC8366321F6672A900D00461 /* ViewController.m in Sources */,
 				DC83662F1F6672A900D00461 /* AppDelegate.m in Sources */,
 				DC83662C1F6672A900D00461 /* main.m in Sources */,
+				DC8366451F668C3F00D00461 /* YJNAudioPlayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "YJNAudioPlayer.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *playBtn;
@@ -16,11 +17,28 @@
 
 @end
 
-@implementation ViewController
+@implementation ViewController {
+    YJNAudioPlayer *_audioPlayer;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    _audioPlayer = [YJNAudioPlayer sharedPlayer];
+}
+
+- (IBAction)playOrPauseAction:(UIButton *)sender {
+    if (!_audioPlayer.isPlaying) {
+        [_playBtn setTitle:@"Pause" forState:UIControlStateNormal];
+        [_audioPlayer playAudioWithUrlOrPath:@"http://yydy.file.alimmdn.com/chat_voice/Voice_20170117_160357_1578"];
+    }else {
+        [_playBtn setTitle:@"Play" forState:UIControlStateNormal];
+        [_audioPlayer pause];
+    }
+}
+
+- (IBAction)slideAction:(UISlider *)sender {
+    
 }
 
 
