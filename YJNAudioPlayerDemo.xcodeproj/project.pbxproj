@@ -1,0 +1,336 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DC83662C1F6672A900D00461 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DC83662B1F6672A900D00461 /* main.m */; };
+		DC83662F1F6672A900D00461 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DC83662E1F6672A900D00461 /* AppDelegate.m */; };
+		DC8366321F6672A900D00461 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8366311F6672A900D00461 /* ViewController.m */; };
+		DC8366351F6672A900D00461 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC8366331F6672A900D00461 /* Main.storyboard */; };
+		DC8366371F6672A900D00461 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC8366361F6672A900D00461 /* Assets.xcassets */; };
+		DC83663A1F6672A900D00461 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC8366381F6672A900D00461 /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		DC8366271F6672A900D00461 /* YJNAudioPlayerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YJNAudioPlayerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC83662B1F6672A900D00461 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DC83662D1F6672A900D00461 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		DC83662E1F6672A900D00461 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		DC8366301F6672A900D00461 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		DC8366311F6672A900D00461 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		DC8366341F6672A900D00461 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DC8366361F6672A900D00461 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DC8366391F6672A900D00461 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DC83663B1F6672A900D00461 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DC8366241F6672A900D00461 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DC83661E1F6672A900D00461 = {
+			isa = PBXGroup;
+			children = (
+				DC8366421F66779200D00461 /* YJNAudioPlayerSwift */,
+				DC8366411F6672F500D00461 /* YJNAudioPlayer */,
+				DC8366291F6672A900D00461 /* YJNAudioPlayerDemo */,
+				DC8366281F6672A900D00461 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DC8366281F6672A900D00461 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DC8366271F6672A900D00461 /* YJNAudioPlayerDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DC8366291F6672A900D00461 /* YJNAudioPlayerDemo */ = {
+			isa = PBXGroup;
+			children = (
+				DC83662D1F6672A900D00461 /* AppDelegate.h */,
+				DC83662E1F6672A900D00461 /* AppDelegate.m */,
+				DC8366301F6672A900D00461 /* ViewController.h */,
+				DC8366311F6672A900D00461 /* ViewController.m */,
+				DC8366331F6672A900D00461 /* Main.storyboard */,
+				DC8366361F6672A900D00461 /* Assets.xcassets */,
+				DC8366381F6672A900D00461 /* LaunchScreen.storyboard */,
+				DC83663B1F6672A900D00461 /* Info.plist */,
+				DC83662A1F6672A900D00461 /* Supporting Files */,
+			);
+			path = YJNAudioPlayerDemo;
+			sourceTree = "<group>";
+		};
+		DC83662A1F6672A900D00461 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DC83662B1F6672A900D00461 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DC8366411F6672F500D00461 /* YJNAudioPlayer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = YJNAudioPlayer;
+			sourceTree = "<group>";
+		};
+		DC8366421F66779200D00461 /* YJNAudioPlayerSwift */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = YJNAudioPlayerSwift;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DC8366261F6672A900D00461 /* YJNAudioPlayerDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DC83663E1F6672A900D00461 /* Build configuration list for PBXNativeTarget "YJNAudioPlayerDemo" */;
+			buildPhases = (
+				DC8366231F6672A900D00461 /* Sources */,
+				DC8366241F6672A900D00461 /* Frameworks */,
+				DC8366251F6672A900D00461 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = YJNAudioPlayerDemo;
+			productName = YJNAudioPlayerDemo;
+			productReference = DC8366271F6672A900D00461 /* YJNAudioPlayerDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DC83661F1F6672A900D00461 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = "杨敬";
+				TargetAttributes = {
+					DC8366261F6672A900D00461 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = N6P8WZG8ZC;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = DC8366221F6672A900D00461 /* Build configuration list for PBXProject "YJNAudioPlayerDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DC83661E1F6672A900D00461;
+			productRefGroup = DC8366281F6672A900D00461 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DC8366261F6672A900D00461 /* YJNAudioPlayerDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DC8366251F6672A900D00461 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC83663A1F6672A900D00461 /* LaunchScreen.storyboard in Resources */,
+				DC8366371F6672A900D00461 /* Assets.xcassets in Resources */,
+				DC8366351F6672A900D00461 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DC8366231F6672A900D00461 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC8366321F6672A900D00461 /* ViewController.m in Sources */,
+				DC83662F1F6672A900D00461 /* AppDelegate.m in Sources */,
+				DC83662C1F6672A900D00461 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		DC8366331F6672A900D00461 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC8366341F6672A900D00461 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		DC8366381F6672A900D00461 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC8366391F6672A900D00461 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DC83663C1F6672A900D00461 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		DC83663D1F6672A900D00461 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DC83663F1F6672A900D00461 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = N6P8WZG8ZC;
+				INFOPLIST_FILE = YJNAudioPlayerDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.vanduza.YJNAudioPlayerDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		DC8366401F6672A900D00461 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = N6P8WZG8ZC;
+				INFOPLIST_FILE = YJNAudioPlayerDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.vanduza.YJNAudioPlayerDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DC8366221F6672A900D00461 /* Build configuration list for PBXProject "YJNAudioPlayerDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC83663C1F6672A900D00461 /* Debug */,
+				DC83663D1F6672A900D00461 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DC83663E1F6672A900D00461 /* Build configuration list for PBXNativeTarget "YJNAudioPlayerDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC83663F1F6672A900D00461 /* Debug */,
+				DC8366401F6672A900D00461 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DC83661F1F6672A900D00461 /* Project object */;
+}
