@@ -30,10 +30,10 @@
 - (IBAction)playOrPauseAction:(UIButton *)sender {
     if (!_audioPlayer.isPlaying) {
         [_playBtn setTitle:@"Pause" forState:UIControlStateNormal];
-        [_audioPlayer playAudioWithUrlOrPath:@"http://yydy.file.alimmdn.com/chat_voice/Voice_20170117_160357_1578"];
+//        [_audioPlayer playAudioWithUrlOrPath:@"http://yydy.file.alimmdn.com/chat_voice/Voice_20170117_160357_1578"];
     }else {
         [_playBtn setTitle:@"Play" forState:UIControlStateNormal];
-        [_audioPlayer pause];
+//        [_audioPlayer pause];
     }
 }
 

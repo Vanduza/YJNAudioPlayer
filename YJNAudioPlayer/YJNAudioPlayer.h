@@ -7,11 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "YJNAudioDelegate.h"
 
 @interface YJNAudioPlayer : NSObject
 @property (nonatomic, assign, readonly, getter=isPlaying) BOOL playing;
+@property (nonatomic, weak) id<YJNAudioDelegate> delegate;
 +(instancetype)sharedPlayer;
--(void)playAudioWithUrlOrPath:(NSString *)urlOrPath;
--(void)pause;
--(void)stopPlayAudio;
+
+-(void)yjn_audioPlayWithUrlOrPath:(NSString *)urlOrPath;
+-(void)yjn_audioPause;
+-(void)yjn_audioStop;
 @end

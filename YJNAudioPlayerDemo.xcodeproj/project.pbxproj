@@ -14,6 +14,7 @@
 		DC8366371F6672A900D00461 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC8366361F6672A900D00461 /* Assets.xcassets */; };
 		DC83663A1F6672A900D00461 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC8366381F6672A900D00461 /* LaunchScreen.storyboard */; };
 		DC8366451F668C3F00D00461 /* YJNAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8366441F668C3F00D00461 /* YJNAudioPlayer.m */; };
+		DCFE120C1F67C0D2003198D6 /* YJNErrorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DCFE120B1F67C0D2003198D6 /* YJNErrorManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,9 @@
 		DC83663B1F6672A900D00461 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC8366431F668C3F00D00461 /* YJNAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJNAudioPlayer.h; sourceTree = "<group>"; };
 		DC8366441F668C3F00D00461 /* YJNAudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJNAudioPlayer.m; sourceTree = "<group>"; };
+		DCFE12061F677C44003198D6 /* YJNAudioDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJNAudioDelegate.h; sourceTree = "<group>"; };
+		DCFE120A1F67C0D2003198D6 /* YJNErrorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJNErrorManager.h; sourceTree = "<group>"; };
+		DCFE120B1F67C0D2003198D6 /* YJNErrorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJNErrorManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +91,9 @@
 		DC8366411F6672F500D00461 /* YJNAudioPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				DCFE12091F67C0A9003198D6 /* Object */,
+				DCFE12071F67BF1D003198D6 /* Constant */,
+				DCFE12051F677BFF003198D6 /* Protocol */,
 				DC8366431F668C3F00D00461 /* YJNAudioPlayer.h */,
 				DC8366441F668C3F00D00461 /* YJNAudioPlayer.m */,
 			);
@@ -98,6 +105,30 @@
 			children = (
 			);
 			path = YJNAudioPlayerSwift;
+			sourceTree = "<group>";
+		};
+		DCFE12051F677BFF003198D6 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				DCFE12061F677C44003198D6 /* YJNAudioDelegate.h */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		DCFE12071F67BF1D003198D6 /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Constant;
+			sourceTree = "<group>";
+		};
+		DCFE12091F67C0A9003198D6 /* Object */ = {
+			isa = PBXGroup;
+			children = (
+				DCFE120A1F67C0D2003198D6 /* YJNErrorManager.h */,
+				DCFE120B1F67C0D2003198D6 /* YJNErrorManager.m */,
+			);
+			path = Object;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,6 +205,7 @@
 			files = (
 				DC8366321F6672A900D00461 /* ViewController.m in Sources */,
 				DC83662F1F6672A900D00461 /* AppDelegate.m in Sources */,
+				DCFE120C1F67C0D2003198D6 /* YJNErrorManager.m in Sources */,
 				DC83662C1F6672A900D00461 /* main.m in Sources */,
 				DC8366451F668C3F00D00461 /* YJNAudioPlayer.m in Sources */,
 			);
@@ -297,6 +329,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = N6P8WZG8ZC;
 				INFOPLIST_FILE = YJNAudioPlayerDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vanduza.YJNAudioPlayerDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -309,6 +342,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = N6P8WZG8ZC;
 				INFOPLIST_FILE = YJNAudioPlayerDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vanduza.YJNAudioPlayerDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
