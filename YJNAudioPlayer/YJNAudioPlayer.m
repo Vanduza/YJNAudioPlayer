@@ -12,10 +12,10 @@
 #import "YJNErrorManager.h"
 
 @interface YJNAudioPlayer()
-@property (nonatomic, strong) AVPlayer *player;
+@property (nonatomic, strong) AVAudioPlayer *player;
 @end
 @implementation YJNAudioPlayer {
-    AVPlayer *_player;
+    AVAudioPlayer *_player;
 }
 
 +(instancetype)sharedPlayer {
@@ -23,20 +23,19 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         manager = [[YJNAudioPlayer alloc] init];
-        manager.player = [[AVPlayer alloc] init];
+        manager.player = [[AVAudioPlayer alloc] init];
         manager.player.volume = [[AVAudioSession sharedInstance] outputVolume];
         [manager p_registerNotifications];
-        
     });
     return manager;
 }
 
 -(void)p_registerNotifications {
     //UIApplicationStatusNotification
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yjn_receivedNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yjn_receivedNotification:) name:UIApplicationDidEnterBackgroundNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yjn_receivedNotification:) name:AVAudioSessionRouteChangeNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yjn_receivedNotification:) name:AVAudioSessionInterruptionNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yjn_receivedNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];//应用激活
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yjn_receivedNotification:) name:UIApplicationDidEnterBackgroundNotification object:nil];//进入后台
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yjn_receivedNotification:) name:AVAudioSessionRouteChangeNotification object:nil];//路径改变
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yjn_receivedNotification:) name:AVAudioSessionInterruptionNotification object:nil];//中断事件
     
     //AVPlayerItemStatusNotification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yjn_receivedNotification:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
@@ -67,6 +66,11 @@
         return;
     }
     
+    if ([notifiName isEqualToString:AVAudioSessionInterruptionNotification]) {
+        [self p_handleInterruptionWithInfo:notification];
+        return;
+    }
+    
     //响应播放事件通知
     if ([notifiName isEqualToString:AVPlayerItemDidPlayToEndTimeNotification]) {
         [self yjn_audioStop];
@@ -79,11 +83,12 @@
     }
 }
 
-//此处可暴露一个对外接口响应routeChange
+#pragma mark - 处理通知的相关事件
+//处理输出路径改变
 -(void)yjn_handleRouteChange:(NSNotification *)notification {
     NSDictionary *interrruptionInfo = notification.userInfo;
     
-    NSInteger reason = [[interrruptionInfo valueForKey:AVAudioSessionRouteChangeReasonKey] integerValue];
+    AVAudioSessionRouteChangeReason reason = [[interrruptionInfo valueForKey:AVAudioSessionRouteChangeReasonKey] integerValue];
     
     switch (reason) {
         case AVAudioSessionRouteChangeReasonNewDeviceAvailable: {
@@ -99,6 +104,9 @@
         case AVAudioSessionRouteChangeReasonOldDeviceUnavailable: {
             // 耳机拔掉
             [self yjn_audioPause];
+            if (_delegate && [_delegate respondsToSelector:@selector(yjn_audioPlayerInterrupted:)]) {
+                [_delegate yjn_audioPlayerInterrupted:_player];
+            }
         }break;
         case AVAudioSessionRouteChangeReasonCategoryChange: {
             // 策略改变
@@ -107,6 +115,26 @@
         default: {
             NSLog(@"AVAudioSessionRouteChangeReason code:%ld",reason);
         }break;
+    }
+}
+
+//处理中断事件
+-(void)p_handleInterruptionWithInfo:(NSNotification *)notification {
+    AVAudioSessionInterruptionType type = [[notification.userInfo objectForKey:AVAudioSessionInterruptionTypeKey] unsignedIntegerValue];
+    if (type == AVAudioSessionInterruptionTypeBegan) {
+        [self.player pause];
+        if (_delegate && [_delegate respondsToSelector:@selector(yjn_audioPlayerInterrupted:)]) {
+            [_delegate yjn_audioPlayerInterrupted:_player];
+        }
+    }else {
+        AVAudioSessionInterruptionOptions options = [[notification.userInfo objectForKey:AVAudioSessionInterruptionOptionKey] unsignedIntegerValue];
+        if (options == AVAudioSessionInterruptionOptionShouldResume) {
+            [self.player play];
+            if (_delegate && [_delegate respondsToSelector:@selector(yjn_audioPlayerResume:)]) {
+                [_delegate yjn_audioPlayerResume:_player];
+            }
+        }
+        NSLog(@"Current interruption type:%lud",type);
     }
 }
 
@@ -128,12 +156,12 @@
     AVPlayerItem *audioItem = [AVPlayerItem playerItemWithURL:url];
     [audioItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     
-    [_player replaceCurrentItemWithPlayerItem:audioItem];
+//    [_player replaceCurrentItemWithPlayerItem:audioItem];
     [_player play];
 }
 
 -(void)yjn_audioPlay {
-    if (self.player.currentItem) {
+//    if (self.player.currentItem) {
         NSError *error = nil;
         [[AVAudioSession sharedInstance] setActive:YES error:&error];
         if (error) {
@@ -143,23 +171,23 @@
         if (_delegate && [_delegate respondsToSelector:@selector(yjn_audioPlayerPlay)]) {
             [_delegate yjn_audioPlayerPlay];
         }
-    }
+//    }
 }
 
 -(void)yjn_audioPause {
-    if (self.player.currentItem) {
+//    if (self.player.currentItem) {
         [self.player pause];
         if (_delegate && [_delegate respondsToSelector:@selector(yjn_audioPlayerPaused)]) {
             [_delegate yjn_audioPlayerPaused];
         }
-    }
+//    }
 }
 
 -(void)yjn_audioStop {
-    if (self.player.currentItem) {
-        [self.player.currentItem removeObserver:self forKeyPath:@"status"];
-        [self.player pause];
-        [self.player replaceCurrentItemWithPlayerItem:nil];
+//    if (self.player.currentItem) {
+//        [self.player.currentItem removeObserver:self forKeyPath:@"status"];
+        [self.player stop];
+//        [self.player replaceCurrentItemWithPlayerItem:nil];
         NSError *error = nil;
         [[AVAudioSession sharedInstance] setActive:NO error:&error];
         if (error) {
@@ -168,7 +196,7 @@
         if (_delegate && [_delegate respondsToSelector:@selector(yjn_audioPlayerStoped)]) {
             [_delegate yjn_audioPlayerStoped];
         }
-    }
+//    }
 }
 
 #pragma mark - Observer
