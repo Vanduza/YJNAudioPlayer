@@ -12,10 +12,10 @@
 #import "YJNErrorManager.h"
 
 @interface YJNAudioPlayer()
-@property (nonatomic, strong) AVAudioPlayer *player;
+@property (nonatomic, strong) AVPlayer *player;
 @end
 @implementation YJNAudioPlayer {
-    AVAudioPlayer *_player;
+    AVPlayer *_player;
 }
 
 +(instancetype)sharedPlayer {
@@ -23,7 +23,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         manager = [[YJNAudioPlayer alloc] init];
-        manager.player = [[AVAudioPlayer alloc] init];
+        manager.player = [[AVPlayer alloc] init];
         manager.player.volume = [[AVAudioSession sharedInstance] outputVolume];
         [manager p_registerNotifications];
     });
@@ -156,12 +156,12 @@
     AVPlayerItem *audioItem = [AVPlayerItem playerItemWithURL:url];
     [audioItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     
-//    [_player replaceCurrentItemWithPlayerItem:audioItem];
+    [_player replaceCurrentItemWithPlayerItem:audioItem];
     [_player play];
 }
 
 -(void)yjn_audioPlay {
-//    if (self.player.currentItem) {
+    if (self.player.currentItem) {
         NSError *error = nil;
         [[AVAudioSession sharedInstance] setActive:YES error:&error];
         if (error) {
@@ -171,23 +171,23 @@
         if (_delegate && [_delegate respondsToSelector:@selector(yjn_audioPlayerPlay)]) {
             [_delegate yjn_audioPlayerPlay];
         }
-//    }
+    }
 }
 
 -(void)yjn_audioPause {
-//    if (self.player.currentItem) {
+    if (self.player.currentItem) {
         [self.player pause];
         if (_delegate && [_delegate respondsToSelector:@selector(yjn_audioPlayerPaused)]) {
             [_delegate yjn_audioPlayerPaused];
         }
-//    }
+    }
 }
 
 -(void)yjn_audioStop {
-//    if (self.player.currentItem) {
-//        [self.player.currentItem removeObserver:self forKeyPath:@"status"];
-        [self.player stop];
-//        [self.player replaceCurrentItemWithPlayerItem:nil];
+    if (self.player.currentItem) {
+        [self.player.currentItem removeObserver:self forKeyPath:@"status"];
+        [self.player pause];
+        [self.player replaceCurrentItemWithPlayerItem:nil];
         NSError *error = nil;
         [[AVAudioSession sharedInstance] setActive:NO error:&error];
         if (error) {
@@ -196,7 +196,7 @@
         if (_delegate && [_delegate respondsToSelector:@selector(yjn_audioPlayerStoped)]) {
             [_delegate yjn_audioPlayerStoped];
         }
-//    }
+    }
 }
 
 #pragma mark - Observer

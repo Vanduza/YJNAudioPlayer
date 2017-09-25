@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-@class AVAudioPlayer;
+@class AVPlayer;
 @protocol YJNAudioDelegate <NSObject>
 @optional
 
@@ -48,11 +48,11 @@
  播放被其他事件中断
  包括：来电、闹钟、FaceTime呼叫、拔掉耳机
  */
--(void)yjn_audioPlayerInterrupted:(AVAudioPlayer *)player;
+-(void)yjn_audioPlayerInterrupted:(AVPlayer *)player;
 
 /**
  其他事件执行完毕，播放恢复
  */
--(void)yjn_audioPlayerResume:(AVAudioPlayer *)player;
+-(void)yjn_audioPlayerResume:(AVPlayer *)player;
 
 @end
