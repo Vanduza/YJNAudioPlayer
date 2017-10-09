@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "YJNAudioDelegate.h"
 
+extern NSString *YJNAudioDomain;
 @interface YJNAudioPlayer : NSObject
 @property (nonatomic, assign, readonly, getter=isPlaying) BOOL playing;
 @property (nonatomic, weak) id<YJNAudioDelegate> delegate;

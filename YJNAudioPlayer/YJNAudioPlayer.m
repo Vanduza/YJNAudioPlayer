@@ -18,6 +18,8 @@
     AVPlayer *_player;
 }
 
+NSString *YJNAudioDomain = @"YJN_AUDIO_DOMAIN";
+
 +(instancetype)sharedPlayer {
     static YJNAudioPlayer *manager = nil;
     static dispatch_once_t onceToken;
@@ -42,10 +44,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yjn_receivedNotification:) name:AVPlayerItemFailedToPlayToEndTimeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yjn_receivedNotification:) name:AVPlayerItemPlaybackStalledNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yjn_receivedNotification:) name:AVPlayerItemTimeJumpedNotification object:nil];
-}
-
--(void)p_removeNotifications {
-    
 }
 
 -(void)yjn_receivedNotification:(NSNotification *)notification {
@@ -73,7 +71,9 @@
     
     //响应播放事件通知
     if ([notifiName isEqualToString:AVPlayerItemDidPlayToEndTimeNotification]) {
-        [self yjn_audioStop];
+        if(_delegate && [_delegate respondsToSelector:@selector(yjn_audioPlayerPlayToEnd:)]) {
+            [_delegate yjn_audioPlayerPlayToEnd:self];
+        }
         return;
     }
     
@@ -105,7 +105,7 @@
             // 耳机拔掉
             [self yjn_audioPause];
             if (_delegate && [_delegate respondsToSelector:@selector(yjn_audioPlayerInterrupted:)]) {
-                [_delegate yjn_audioPlayerInterrupted:_player];
+                [_delegate yjn_audioPlayerInterrupted:self];
             }
         }break;
         case AVAudioSessionRouteChangeReasonCategoryChange: {
@@ -124,14 +124,14 @@
     if (type == AVAudioSessionInterruptionTypeBegan) {
         [self.player pause];
         if (_delegate && [_delegate respondsToSelector:@selector(yjn_audioPlayerInterrupted:)]) {
-            [_delegate yjn_audioPlayerInterrupted:_player];
+            [_delegate yjn_audioPlayerInterrupted:self];
         }
     }else {
         AVAudioSessionInterruptionOptions options = [[notification.userInfo objectForKey:AVAudioSessionInterruptionOptionKey] unsignedIntegerValue];
         if (options == AVAudioSessionInterruptionOptionShouldResume) {
             [self.player play];
             if (_delegate && [_delegate respondsToSelector:@selector(yjn_audioPlayerResume:)]) {
-                [_delegate yjn_audioPlayerResume:_player];
+                [_delegate yjn_audioPlayerResume:self];
             }
         }
         NSLog(@"Current interruption type:%lud",type);
@@ -165,6 +165,9 @@
         NSError *error = nil;
         [[AVAudioSession sharedInstance] setActive:YES error:&error];
         if (error) {
+            if (_delegate && [_delegate respondsToSelector:@selector(yjn_audioPlayerFailed:)]) {
+                [_delegate yjn_audioPlayerFailed:error];
+            }
             NSLog(@"AVAudioSession active error;%@",error.localizedDescription);
         }
         [self.player play];
@@ -191,7 +194,10 @@
         NSError *error = nil;
         [[AVAudioSession sharedInstance] setActive:NO error:&error];
         if (error) {
-            NSLog(@"AVAudioSession deactive error;%@",error.localizedDescription);
+            NSLog(@"AVAudioSession deactive error:%@",error.localizedDescription);
+            if (_delegate && [_delegate respondsToSelector:@selector(yjn_audioPlayerFailed:)]) {
+                [_delegate yjn_audioPlayerFailed:error];
+            }
         }
         if (_delegate && [_delegate respondsToSelector:@selector(yjn_audioPlayerStoped)]) {
             [_delegate yjn_audioPlayerStoped];
@@ -202,8 +208,8 @@
 #pragma mark - Observer
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
     if([[change objectForKey:@"new"] integerValue] == AVPlayerItemStatusReadyToPlay){
-        if (_delegate && [_delegate respondsToSelector:@selector(yjn_audioPlayerReadyToPlay)]) {
-            [_delegate yjn_audioPlayerReadyToPlay];
+        if (_delegate && [_delegate respondsToSelector:@selector(yjn_audioPlayerReadyToPlay:)]) {
+            [_delegate yjn_audioPlayerReadyToPlay:self];
         }
     }else if([[change objectForKey:@"new"] integerValue] == AVPlayerItemStatusFailed){
         if (_delegate && [_delegate respondsToSelector:@selector(yjn_audioPlayerFailed:)]) {

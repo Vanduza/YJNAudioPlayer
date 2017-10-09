@@ -11,7 +11,6 @@ typedef NS_ENUM(NSInteger, YJNAudioErrorCode) {
     YJNAudioStatusFailed    = 0
 };
 
-extern NSString *YJNAudioDomain;
 @interface YJNErrorManager : NSObject
 
 @end

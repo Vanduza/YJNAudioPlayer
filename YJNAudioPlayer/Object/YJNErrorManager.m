@@ -9,5 +9,5 @@
 #import "YJNErrorManager.h"
 
 @implementation YJNErrorManager
-NSString *YJNAudioDomain = @"YJN_AUDIO_DOMAIN";
+
 @end

@@ -7,19 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
-@class AVPlayer;
+@class YJNAudioPlayer;
 @protocol YJNAudioDelegate <NSObject>
 @optional
 
 /**
  数据缓冲中的回调
  */
--(void)yjn_audioPlayerBuffering;
+-(void)yjn_audioPlayerBuffering:(YJNAudioPlayer *)player;
 
 /**
  缓冲完毕准备播放
  */
--(void)yjn_audioPlayerReadyToPlay;
+-(void)yjn_audioPlayerReadyToPlay:(YJNAudioPlayer *)player;
+
+-(void)yjn_audioPlayerPlayToEnd:(YJNAudioPlayer *)player;
 
 /**
  开始播放
@@ -48,11 +50,11 @@
  播放被其他事件中断
  包括：来电、闹钟、FaceTime呼叫、拔掉耳机
  */
--(void)yjn_audioPlayerInterrupted:(AVPlayer *)player;
+-(void)yjn_audioPlayerInterrupted:(YJNAudioPlayer *)player;
 
 /**
  其他事件执行完毕，播放恢复
  */
--(void)yjn_audioPlayerResume:(AVPlayer *)player;
+-(void)yjn_audioPlayerResume:(YJNAudioPlayer *)player;
 
 @end
