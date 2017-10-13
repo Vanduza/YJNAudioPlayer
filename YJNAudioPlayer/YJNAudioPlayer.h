@@ -13,8 +13,10 @@ extern NSString *YJNAudioDomain;
 @interface YJNAudioPlayer : NSObject
 @property (nonatomic, assign, readonly, getter=isPlaying) BOOL playing;
 @property (nonatomic, weak) id<YJNAudioDelegate> delegate;
-+(instancetype)sharedPlayer;
+@property (nonatomic, assign, readonly) int duration;//second
 
++(instancetype)sharedPlayer;
+-(int)yjn_audioDurationWithUrlOrPath:(NSString *)urlOrPath;
 -(void)yjn_audioPlayWithUrlOrPath:(NSString *)urlOrPath;
 -(void)yjn_audioPause;
 -(void)yjn_audioStop;

@@ -13,6 +13,7 @@
 
 @interface YJNAudioPlayer()
 @property (nonatomic, strong) AVPlayer *player;
+@property (nonatomic, strong) id timeObserver;
 @end
 @implementation YJNAudioPlayer {
     AVPlayer *_player;
@@ -81,6 +82,16 @@ NSString *YJNAudioDomain = @"YJN_AUDIO_DOMAIN";
         [self yjn_audioPause];
         return;
     }
+}
+
+-(void)p_removeObserverOnPlayerItem {
+    [self.player.currentItem removeObserver:self forKeyPath:@"status"];
+    [self.player.currentItem removeObserver:self forKeyPath:@"loadedTimeRanges"];
+    if (_timeObserver) {
+        [_player removeTimeObserver:_timeObserver];
+        _timeObserver = nil;
+    }
+    
 }
 
 #pragma mark - 处理通知的相关事件
@@ -155,6 +166,18 @@ NSString *YJNAudioDomain = @"YJN_AUDIO_DOMAIN";
     
     AVPlayerItem *audioItem = [AVPlayerItem playerItemWithURL:url];
     [audioItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
+    [audioItem addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
+    
+    if (!_timeObserver) {
+        __weak typeof(self) weakSelf = self;
+        _timeObserver = [_player addPeriodicTimeObserverForInterval:CMTimeMake(1.0, 1.0) queue:nil usingBlock:^(CMTime time) {
+            float current = CMTimeGetSeconds(time);
+            NSLog(@"currentTime:%.2f",current);
+            if (_delegate && [_delegate respondsToSelector:@selector(yjn_audioPlayerPlayingWithProgress:)]) {
+                [weakSelf.delegate yjn_audioPlayerPlayingWithProgress:current];
+            }
+        }];
+    }
     
     [_player replaceCurrentItemWithPlayerItem:audioItem];
     [_player play];
@@ -188,7 +211,8 @@ NSString *YJNAudioDomain = @"YJN_AUDIO_DOMAIN";
 
 -(void)yjn_audioStop {
     if (self.player.currentItem) {
-        [self.player.currentItem removeObserver:self forKeyPath:@"status"];
+        [self p_removeObserverOnPlayerItem];
+        
         [self.player pause];
         [self.player replaceCurrentItemWithPlayerItem:nil];
         NSError *error = nil;
@@ -205,22 +229,57 @@ NSString *YJNAudioDomain = @"YJN_AUDIO_DOMAIN";
     }
 }
 
+-(int)yjn_audioDurationWithUrlOrPath:(NSString *)urlOrPath {
+    NSURL *url = nil;
+    if ([urlOrPath hasPrefix:@"http"]) {
+        url = [NSURL URLWithString:urlOrPath];
+    }else {
+        url = [NSURL fileURLWithPath:urlOrPath];
+    }
+    
+    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:url options:nil];
+    CMTime   time = [asset duration];
+    int seconds = ceil(time.value/time.timescale);
+    return seconds;
+}
+
 #pragma mark - Observer
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
-    if([[change objectForKey:@"new"] integerValue] == AVPlayerItemStatusReadyToPlay){
-        if (_delegate && [_delegate respondsToSelector:@selector(yjn_audioPlayerReadyToPlay:)]) {
-            [_delegate yjn_audioPlayerReadyToPlay:self];
+    AVPlayerItem * songItem = object;
+    
+    if ([keyPath isEqualToString:@"loadedTimeRanges"]) {
+        NSArray * array = songItem.loadedTimeRanges;
+        CMTimeRange timeRange = [array.firstObject CMTimeRangeValue]; //本次缓冲的时间范围
+        NSTimeInterval totalBuffer = CMTimeGetSeconds(timeRange.start) + CMTimeGetSeconds(timeRange.duration); //缓冲总长度
+        NSLog(@"共缓冲%.2f",totalBuffer);
+        if (_delegate && [_delegate respondsToSelector:@selector(yjn_audioPlayerBuffering:progress:)]) {
+            [_delegate yjn_audioPlayerBuffering:self progress:totalBuffer];
         }
-    }else if([[change objectForKey:@"new"] integerValue] == AVPlayerItemStatusFailed){
-        if (_delegate && [_delegate respondsToSelector:@selector(yjn_audioPlayerFailed:)]) {
-            NSError *error = [NSError errorWithDomain:YJNAudioDomain code:YJNAudioStatusFailed userInfo:@{NSLocalizedDescriptionKey:@"缓冲失败"}];
-            [_delegate yjn_audioPlayerFailed:error];
+    }else if ([keyPath isEqualToString:@"status"]) {
+        if([[change objectForKey:@"new"] integerValue] == AVPlayerItemStatusReadyToPlay){
+            if (_delegate && [_delegate respondsToSelector:@selector(yjn_audioPlayerReadyToPlay:)]) {
+                [_delegate yjn_audioPlayerReadyToPlay:self];
+            }
+            
+        }else if([[change objectForKey:@"new"] integerValue] == AVPlayerItemStatusFailed){
+            if (_delegate && [_delegate respondsToSelector:@selector(yjn_audioPlayerFailed:)]) {
+                NSError *error = [NSError errorWithDomain:YJNAudioDomain code:YJNAudioStatusFailed userInfo:@{NSLocalizedDescriptionKey:@"缓冲失败"}];
+                [_delegate yjn_audioPlayerFailed:error];
+            }
         }
     }
+//    else if ([keyPath isEqualToString:@"currentTime"]) {
+//        if (_delegate && [_delegate respondsToSelector:@selector(yjn_audioPlayerPlayingWithProgress:)]) {
+//            CMTime time = songItem.currentTime;
+//            [_delegate yjn_audioPlayerPlayingWithProgress:time.value];
+//        }
+//    }
 }
 
 -(void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
+
 
 @end

@@ -14,7 +14,7 @@
 /**
  数据缓冲中的回调
  */
--(void)yjn_audioPlayerBuffering:(YJNAudioPlayer *)player;
+-(void)yjn_audioPlayerBuffering:(YJNAudioPlayer *)player progress:(NSTimeInterval)progress;
 
 /**
  缓冲完毕准备播放
@@ -27,6 +27,13 @@
  开始播放
  */
 -(void)yjn_audioPlayerPlay;
+
+/**
+ 正在播放的进度回调
+
+ @param progress 当前播放进度（单位:second）
+ */
+-(void)yjn_audioPlayerPlayingWithProgress:(NSTimeInterval)progress;
 
 /**
  暂停播放
