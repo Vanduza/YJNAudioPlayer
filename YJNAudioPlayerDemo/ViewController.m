@@ -27,8 +27,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _shortAudio = @"http://yiyichat-dev.oss-cn-shenzhen.aliyuncs.com/d81249e7d9c2f2a144f563ddeedf91ed/video/TTT1.mp3";
-    _longAudio = @"http://yiyichat-dev.oss-cn-shenzhen.aliyuncs.com/d81249e7d9c2f2a144f563ddeedf91ed/audio/TTT.mp3";
+    _shortAudio = @"example:shortsource.mp3";
+    _longAudio = @"example:longsource.mp3";
     _audioPlayer = [YJNAudioPlayer sharedPlayer];
     _audioPlayer.delegate = self;
 }
